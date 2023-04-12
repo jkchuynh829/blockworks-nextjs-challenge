@@ -13,6 +13,11 @@ import {
 } from "recharts";
 import FilterButtons from "../components/filterButton";
 
+const isProd = process.env.NODE_ENV === "production";
+const apiBaseUrl = isProd
+  ? process.env.NEXT_PUBLIC_GH_PAGES_API_BASE_URL
+  : process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL;
+
 interface Data {
   time: string;
   [key: string]: string;
@@ -183,9 +188,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const fetchData = async (): Promise<Data[]> => {
-    const response = await fetch(
-      `${process.env.API_BASE_URL ?? "http://localhost:3000/api"}/btc-addresses`
-    );
+    const response = await fetch(`${apiBaseUrl}/btc-addresses`);
     return await response.json();
   };
 
