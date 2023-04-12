@@ -16,7 +16,7 @@ import FilterButtons from "../components/filterButton";
 const isProd = process.env.NODE_ENV === "production";
 const apiBaseUrl = isProd
   ? process.env.NEXT_PUBLIC_GH_PAGES_API_BASE_URL
-  : process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL;
+  : process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface Data {
   time: string;
