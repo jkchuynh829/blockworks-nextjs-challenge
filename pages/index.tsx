@@ -184,7 +184,9 @@ const Home: React.FC<HomeProps> = ({ data }) => {
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const fetchData = async (): Promise<Data[]> => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/btc-addresses`
+      `${
+        process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3000/api"
+      }/btc-addresses`
     );
     return await response.json();
   };
