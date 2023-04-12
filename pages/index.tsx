@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Layout from "../components/layout";
 import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import { useCallback, useMemo, useState } from "react";
 import {
   LineChart,
@@ -182,12 +183,11 @@ const Home: React.FC<HomeProps> = ({ data }) => {
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const router = useRouter();
+  const basePath = router.basePath;
+
   const fetchData = async (): Promise<Data[]> => {
-    const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3000/api"
-      }/btc-addresses`
-    );
+    const response = await fetch(`${basePath}/btc-addresses`);
     return await response.json();
   };
 
